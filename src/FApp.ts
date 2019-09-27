@@ -26,7 +26,7 @@ export const fApp =
                             app.use(bodyParser.json());
                         }
                         if (bUseStatic) {
-                            app.use(express.static('./public'));
+                            app.use(express.static('../public'));
                         }
                         if (bUseViews) {
                             app.set('views', path.join(__dirname, '/View'));

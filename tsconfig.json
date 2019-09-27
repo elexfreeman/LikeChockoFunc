@@ -1,18 +1,29 @@
 {
     "compilerOptions": {
         "experimentalDecorators": true,
-        "target": "es2017",
-        "module": "commonjs",
+        "target": "es5",
+        "lib": [
+            "dom",
+            "es2017"
+        ],
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
         "outDir": "build",
         "rootDir": "src",
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "baseUrl": "./src/*",
+        "paths": {
+            "*.ts": [
+                "*"
+            ]
+        }
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue"
     ],
     "exclude": [
         "node_modules"

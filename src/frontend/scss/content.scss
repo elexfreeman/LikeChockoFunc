@@ -1,0 +1,50 @@
+.main-content {
+  padding-top: 4rem;
+}
+
+.delivery {
+  background-color: #f0f0f0;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+
+  h2 {
+    text-align: center;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: $dark-color;
+  }
+
+  .delivery-info {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+.contacts {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 100;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  .qq {
+      font-size: 1rem;
+  }
+  .soc {
+      padding-top: 1rem;
+  }
+}
+
+
+
+@media (max-width: 580px) {
+
+  .main-content{
+    padding-top: 0;
+  }
+  .delivery{
+    .delivery-info {
+      font-size: 1rem;
+    }
+  }
+}

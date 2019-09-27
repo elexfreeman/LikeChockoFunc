@@ -64,3 +64,5 @@ typings/
 build/*
 
 package-lock.json
+
+# public/img/*

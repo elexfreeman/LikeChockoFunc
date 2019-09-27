@@ -41,6 +41,9 @@ const faCheckout = async (req: MainRequest, res: express.Response, next: any) =>
             (body['user'].surname)
             (body['user'].phone);
 
+        req.cValidator.fProcess();
+
+
         /* записываем в DB */
         const userId: number = await FUser.faRegister(body['user'].name)
             (body['user'].surname)

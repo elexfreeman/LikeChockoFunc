@@ -1,16 +1,19 @@
-const fIncSumm = (n, a) => {
-    if (n == 0) return a;
-    return fIncSumm(n - 1, a + 1);
-}
+const compose = (...fns) => (...args) => fns.reduceRight((res, fn) => [fn.call(null, ...res)], args)[0];
 
-const ftailIncSumm = (n, a) => {
-    const incept = (nn, a) => {
-        if (nn == 0) return a;
-        return incept(nn - 1, a + 1);
-    }   
+const fToArr = (s) => s.split('');
 
-    return incept(n, a);
-}
+const fToUpc = (s) => s.toUpperCase();
+
+const fToUpperCaseArr = (aS) => aS.map(fToUpc);
+
+const fToStr = (aS) => aS.join('_');
+
+const s = 'Привет';
 
 
-console.log(ftailIncSumm(100000, 1));
+const out = compose(fToStr, fToUpperCaseArr, fToArr);
+const tOut = fToStr(fToUpperCaseArr(fToArr(s)))
+console.log(out(s), tOut);
+
+console.log('П_Р_И_В_Е_Т' == out(s));
+
