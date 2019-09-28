@@ -8,6 +8,8 @@ export interface OrderProductI {
     order_id?: number;
     price?: number;
     product_id?: number;
+    caption?: string;
+    img?: string;
 }
 
 export interface OrderI {

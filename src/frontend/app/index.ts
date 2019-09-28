@@ -1,19 +1,19 @@
 import Vue from 'vue';
 
-import toCard from "./components/toCard.vue";
+import toCart from "./components/toCart.vue";
 import msgModal from "./components/msgModal.vue";
-import cardComponent from "./components/cardComponent.vue";
+import cartComponent from "./components/cartComponent.vue";
 import cartPage from "./components/cartPage.vue";
 
-import store from './index_vuex';
-import { Card } from '../objects/Card';
+import store from './AppVuex';
+import { Cart } from '../objects/Cart';
 import { testRun, init } from './CartTable';
 
 
 var buttons = document.querySelectorAll(".cart-button");
-let card = Card.Init();
+let cart = Cart.Init();
 
-store.commit('setCard', card);
+store.commit('setCart', cart);
 
 
 /* Установка кнопок в корзину */
@@ -33,7 +33,7 @@ setTimeout(() => {
                 product_img: buttons[i].getAttribute('product_img'),
             },
             store: store,
-            render: h => h(toCard)
+            render: h => h(toCart)
         });
     }
 });
@@ -47,10 +47,10 @@ new Vue({
 });
 
 new Vue({
-    el: '#card',
+    el: '#cart',
     data: {},
     store: store,
-    render: h => h(cardComponent)
+    render: h => h(cartComponent)
 });
 
 let cart_page = document.getElementById('cart_page');

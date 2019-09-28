@@ -9,6 +9,9 @@ const expect = require('chai').expect;
 
 import axios from "axios";
 
+import * as OrderAPI from "../../src/frontend/app/OrderAPI";
+import { OrderI } from "../../src/Func/Order/TOrder";
+
 const vAxios = axios.create({
     baseURL: 'http://localhost:3005',
     timeout: 5000,
@@ -39,7 +42,7 @@ const run = async () => {
                 token: 'qweqasd234',
             };
 
-            let order = {
+            const order: OrderI = {
                 city: 'string',
                 delivery_address: 'string',
                 comment: 'string',
@@ -56,23 +59,17 @@ const run = async () => {
                         product_id: 2,
                         caption: 'asdad',
                         price: 555,
-                        count: '3434',
-
+                        count: 3434,
                     }
                 ]
             }
 
+            let resp = await OrderAPI.fCheckout(user)(order)
 
-            let resp = await vAxios.post(
-                `/order/checkout`, {
-                user: user,
-                order: order
-            }
-            );
 
             console.log(resp.data);
 
-            assert.ok(resp.data.ok);
+            assert.ok(resp.ok);
         }).timeout(5000);
 
 
@@ -108,7 +105,7 @@ const run = async () => {
                 ]
             }
 
-
+/* 
             let resp = await vAxios.post(
                 `/order/checkout`, {
                 user: user,
@@ -118,7 +115,7 @@ const run = async () => {
 
             console.log(resp.data);
 
-            assert.ok(!resp.data.ok);
+            assert.ok(!resp.data.ok); */
         }).timeout(5000);
 
 

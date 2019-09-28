@@ -18,7 +18,7 @@
 
   <div class="columns">
     <div class="product-img column col-6 col-sm-12">
-      <div class="card-image">
+      <div class="cart-image">
         <img class="p-img img-1" src="/img/<%= product.img %>" alt="<%= product.caption %>">
         <img class="p-img img-2" src="/img/<%= product.bgImg %>" alt="<%= product.caption %>">
       </div>
@@ -26,7 +26,7 @@
     <div class="product-container column col-6  col-sm-12">
       <h1><%= product.caption %></h1>
       <div class="price"><%= product.price %> руб.</div>
-      <div class="card-button">
+      <div class="cart-button">
         <div product_img="/img/<%= product.img %>" product_id='<%= product.id %>'
           product_caption='<%= product.caption %>' product_price='<%= product.price %>' class='cart-button'></div>
       </div>

@@ -1,5 +1,5 @@
 import { User } from "./User";
-import { Card } from "./Card";
+import { Cart } from "./Cart";
 import BaseObject from "./BaseObject";
 import { ProductI } from "../../Func/Product/TProduct";
 import { OrderI } from "../../Func/Order/TOrder";
@@ -14,7 +14,7 @@ export class Order extends BaseObject {
     /**
      * 
      * @param user - пользователь
-     * @param card - его корзина
+     * @param cart - его корзина
      */
     constructor() {
         super();
@@ -23,7 +23,7 @@ export class Order extends BaseObject {
     /**
      * Оформить заказ
      */
-    public async Checkout(user: User, card: Card) {
+    public async Checkout(user: User, cart: Cart) {
         this.ok = true;
 
         let resp = await this.axios.post(this.apiUrl + '/order/checkout', {

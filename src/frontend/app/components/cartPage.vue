@@ -1,10 +1,10 @@
 <template>
-  <div class="card_component">
+  <div class="cart_component">
     <div class="modal-body">
       <div class="content">
         <div class="columns">
           <div class="column col-sm-12 col-6 col-order">
-            <div class="card-caption-1">Оформление заказа</div>
+            <div class="cart-caption-1">Оформление заказа</div>
             <div v-bind:class="{ 'has-error': errors['empty_user_name'] }" class="form-group">
               <label class="form-label">Ваше имя:</label>
               <input v-model="user.name" class="form-input" type="text" />
@@ -62,17 +62,17 @@
               />
             </div>
           </div>
-          <div class="column col-sm-12 col-6 col-card">
-            <div class="card-caption-1">Корзина</div>
-            <div v-bind:key="index" v-for="(item, index) in card.products">
-              <div class="columns card-list">
+          <div class="column col-sm-12 col-6 col-cart">
+            <div class="cart-caption-1">Корзина</div>
+            <div v-bind:key="index" v-for="(item, index) in cart.products">
+              <div class="columns cart-list">
                 <div class="column col-5">
-                  <img class="card-img" v-bind:src="item.img" />
+                  <img class="cart-img" v-bind:src="item.img" />
                 </div>
                 <div class="column col-7">
                   <div class="item-caption">{{item.caption}}</div>
                   <div class="item-buttons">
-                    <div class="card-counter">
+                    <div class="cart-counter">
                       <div class="conter-button" v-on:click="()=>countDec(item)">
                         <i class="icon icon-minus"></i>
                       </div>
@@ -93,10 +93,10 @@
       </div>
     </div>
     <div class="modal-footer">
-      <div v-if="cardFormError" class="error-msg-footer">Заполненны не все поля</div>
-      <div class="card-footer">
+      <div v-if="cartFormError" class="error-msg-footer">Заполненны не все поля</div>
+      <div class="cart-footer">
         <div class="total-price">Итого: {{totalPrice}} руб.</div>
-        <div class="card-button text-right">
+        <div class="cart-button text-right">
           <button v-on:click="checkout" class="btn btn-primary btn-lg">Заказать</button>
         </div>
       </div>
@@ -104,9 +104,9 @@
   </div>
 </template>
 
-<script>
-import CardController from "../CardController";
-const cardController = new CardController();
+<script lang='ts'>
+import CartController from "../CartController";
+const cartController = new CartController();
 
 export default {
   name: "cartPage",
@@ -121,27 +121,27 @@ export default {
     testCheck(e) {
       console.log(e);
     },
-    onShowCard() {
-      cardController.onShowCard();
+    onShowCart() {
+      cartController.onShowCart();
     },
-    onHideCard() {
-      cardController.onHideCard();
+    onHideCart() {
+      cartController.onHideCart();
     },
     countInc(item) {
       item.count++;
-      this.$store.state.card.save();
+      this.$store.state.cart.save();
     },
     countDec(item) {
       if (item.count > 1) {
         item.count--;
-        this.$store.state.card.save();
+        this.$store.state.cart.save();
       }
     },
     checkout() {
-      cardController.checkout();
+      cartController.checkout();
     },
     removeItem(item) {
-      this.$store.state.card.removeItem(item.id);
+      this.$store.state.cart.removeItem(item.id);
     }
   }, // methods
 
@@ -149,11 +149,11 @@ export default {
     phone() {
       return this.$store.state.phone;
     },
-    showCard() {
-      return this.$store.state.showCard;
+    showCart() {
+      return this.$store.state.showCart;
     },
-    card() {
-      return this.$store.state.card;
+    cart() {
+      return this.$store.state.cart;
     },
     order() {
       return this.$store.state.order;
@@ -162,13 +162,13 @@ export default {
       return this.$store.state.user;
     },
     errors() {
-      return this.$store.state.cardErrors;
+      return this.$store.state.cartErrors;
     },
-    cardFormError() {
-      return this.$store.state.cardFormError;
+    cartFormError() {
+      return this.$store.state.cartFormError;
     },
     totalPrice() {
-      return this.$store.state.card.getTotalPrice();
+      return this.$store.state.cart.getTotalPrice();
     }
   }, // computed
 

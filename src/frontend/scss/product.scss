@@ -12,12 +12,12 @@
   margin-left: 10px;
   margin-right: 10px;
 
-  .card-subtitle {
+  .cart-subtitle {
     height: 4rem;
     overflow: hidden;   
   }
 
-  .card-image {
+  .cart-image {
     height: 400px;
     cursor: pointer;
   }
@@ -51,7 +51,7 @@
   .product {
     width: 100%;
 
-    .card-image{
+    .cart-image{
       height: auto;
     }
     .p-img {

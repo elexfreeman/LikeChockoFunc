@@ -1,6 +1,6 @@
 declare var localStorage: any;
 
-export interface CardProductI {
+export interface CartProductI {
     id: number;
     caption: string;
     price: number;
@@ -11,9 +11,9 @@ export interface CardProductI {
 /**
  * Работа с корзиной
  */
-export class Card {
+export class Cart {
 
-    public products: CardProductI[];
+    public products: CartProductI[];
 
     constructor() {
         this.products = [];
@@ -40,7 +40,7 @@ export class Card {
 
 
     public static Init() {
-        let self = new Card;
+        let self = new Cart;
         self.load();
         return self;
     }
@@ -66,7 +66,7 @@ export class Card {
         this.save();
     }
 
-    public add(product: CardProductI) {
+    public add(product: CartProductI) {
 
         let newP = true;
         for (let i = 0; i < this.products.length; i++) {
@@ -90,20 +90,20 @@ export class Card {
     public load() {
         this.products = [];
         try {
-            let card = localStorage.getItem('card');
-            if (!card) {
+            let cart = localStorage.getItem('cart');
+            if (!cart) {
                 throw 'error localStorage'
             }
 
-            card = JSON.parse(card);
+            cart = JSON.parse(cart);
 
-            for (let i = 0; i < card.length; i++) {
+            for (let i = 0; i < cart.length; i++) {
                 this.products.push({
-                    id: parseInt(card[i]['id']),
-                    caption: card[i]['caption'],
-                    price: parseFloat(card[i]['price']),
-                    img: card[i]['img'],
-                    count: card[i]['count']
+                    id: parseInt(cart[i]['id']),
+                    caption: cart[i]['caption'],
+                    price: parseFloat(cart[i]['price']),
+                    img: cart[i]['img'],
+                    count: cart[i]['count']
                 })
             }
         } catch (e) {
@@ -115,6 +115,6 @@ export class Card {
      * Сохраняем товары в localStorage
      */
     public save() {
-        localStorage.setItem('card', JSON.stringify(this.products));
+        localStorage.setItem('cart', JSON.stringify(this.products));
     }
 }
