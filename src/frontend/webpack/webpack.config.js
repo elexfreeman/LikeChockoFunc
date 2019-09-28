@@ -112,6 +112,10 @@ module.exports = {
             filename: 'index.html',
             template: './src/frontend/html/index.html'
         }),
+        new HtmlWebpackPlugin({
+            filename: 'cart.html',
+            template: './src/frontend/html/cart.html'
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'

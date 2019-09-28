@@ -1,17 +1,15 @@
 import { User } from "./User";
 import { Card } from "./Card";
 import BaseObject from "./BaseObject";
+import { ProductI } from "../../Func/Product/TProduct";
+import { OrderI } from "../../Func/Order/TOrder";
 
 /**
  * Заказ
  */
 export class Order extends BaseObject {
 
-    public city: string;
-    public deliveryAddress: string;
-    public comment: string;
-    public deliveryDate: string;
-    public deliveryTimeComment: string;
+    public data: OrderI;
 
     /**
      * 
@@ -19,7 +17,7 @@ export class Order extends BaseObject {
      * @param card - его корзина
      */
     constructor() {
-        super();      
+        super();
     }
 
     /**
@@ -30,9 +28,8 @@ export class Order extends BaseObject {
 
         let resp = await this.axios.post(this.apiUrl + '/order/checkout', {
             user: user,
-            card: card,
-            order: this
-        });      
+            order: this.data,
+        });
         return resp['data'];
     }
 

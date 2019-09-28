@@ -1,4 +1,4 @@
-declare var apiUrl: string;
+declare var window: any;
 import axios, { AxiosStatic } from 'axios';
 
 /**
@@ -16,7 +16,7 @@ export default class BaseObject {
 
     constructor() {
         this.axios = axios;
-        this.apiUrl = apiUrl;
+        this.apiUrl = window['apiUrl'];
         this.ok = true;
     }
 
