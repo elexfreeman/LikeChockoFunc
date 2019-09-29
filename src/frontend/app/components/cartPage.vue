@@ -5,7 +5,7 @@
         <div class="columns">
           <div class="column col-sm-12 col-6 col-order">
             <div class="cart-caption-1">Оформление заказа</div>
-            <div v-bind:class="{ 'has-error': errors['empty_user_name'] }" class="form-group">
+            <div v-bind:class="{ 'has-error': hasError('User.name') }" class="form-group">
               <label class="form-label">Ваше имя:</label>
               <input
                 v-on:change="()=>onChangeUser(user)"
@@ -14,7 +14,7 @@
                 type="text"
               />
             </div>
-            <div v-bind:class="{ 'has-error': errors['empty_user_phone'] }" class="form-group">
+            <div v-bind:class="{ 'has-error': hasError('User.phone') }" class="form-group">
               <label class="form-label">Ваш телефон:</label>
               <input
                 v-on:change="()=>onChangeUser(user)"
@@ -136,6 +136,7 @@ import { UserController } from "../UserController";
 import * as FFOrder from "../../../Func/Order/FFOrder";
 import { OrderI } from "../../../Func/Order/TOrder";
 import { UserI } from "../../../Func/User/TUser";
+import { fHasError } from "../../../Func/TValidator";
 
 const orderController = new OrderController();
 const userController = new UserController();
@@ -175,6 +176,13 @@ export default {
     },
     removeItem(item: any) {
       this.$store.state.order.removeItem(item.id);
+    },
+    hasError(sField: string) {
+      try {
+        return fHasError(this.$store.state.cartErrors)(sField);
+      } catch (e) {
+        return false;
+      }
     }
   }, // methods
 

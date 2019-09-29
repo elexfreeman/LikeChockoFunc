@@ -1,3 +1,5 @@
+import * as _ from "lodash";
+
 export type TCheckField = (cValidator: TValidator) => (sField: string) => TValidator;
 
 export interface ErrorsI {
@@ -101,7 +103,7 @@ export class TValidator {
      * @param data 
      */
     public fDefault(data: any): TValidator {
-        if(this.fIsNull()) {
+        if (this.fIsNull()) {
             this.data = data;
         }
         return this;
@@ -633,3 +635,14 @@ export class TValidator {
     }
 
 }
+
+/**
+ * Проверяет есть ли ошибки для данного поля
+ * @param errors 
+ */
+export const fHasError =
+    (errors: ErrorsI) =>
+        (sField: string): boolean =>
+            Boolean(_.map(errors[sField], (error: any) => (error ? 1 : 0))
+                .reduce((n: any, key: number) => (n + key)));
+

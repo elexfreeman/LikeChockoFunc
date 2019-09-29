@@ -13,7 +13,7 @@
             class="order-ico"
             src="/img/order-ico.png"
           />-->
-          <a href="/order">
+          <a href="/cart">
             <img v-if="order.products.length > 0" class="order-ico" src="/img/order-ico.png" />
           </a>
         </div>

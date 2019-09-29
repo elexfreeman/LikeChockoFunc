@@ -96,7 +96,7 @@ export class OrderController {
 
         const resp: CheckoutRespI = await OrderAPI
             .fCheckout(store.state.user)
-            (store.state.user);
+            (store.state.order);
 
         store.commit('setCartErrors', resp.errors);
 

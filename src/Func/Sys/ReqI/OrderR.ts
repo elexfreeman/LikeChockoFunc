@@ -13,7 +13,9 @@ export interface CheckoutI {
 export interface CheckoutRespI {
     ok: boolean;
     errors: any[];
-    data: number;
+    data: {
+        order_id: number;
+    };
     msg: string;
 
 }

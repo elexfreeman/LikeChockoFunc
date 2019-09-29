@@ -41,7 +41,7 @@ export const fVUserRegister: TVUserRegister =
             (surname: string) =>
                 (phone: string) => {
                     fCheckName(cValidator)(name);
-                    fCheckSurname(cValidator)(surname);
+                    //fCheckSurname(cValidator)(surname);
                     fCheckPhone(cValidator)(phone);
                     return cValidator.fIsOk();
                 };                
