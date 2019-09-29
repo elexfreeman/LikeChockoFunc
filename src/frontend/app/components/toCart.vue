@@ -5,9 +5,9 @@
 </template>
 
 <script lang='ts'>
-import CartController from "../CartController";
+import { OrderController } from "../OrderController";
 
-const cartController = new CartController();
+const orderController = new OrderController();
 
 export default {
   name: "toCart",
@@ -19,8 +19,8 @@ export default {
   mounted() {}, // mounted
 
   methods: {
-    onAddCart(e:any) {
-      cartController.onAddCart(this.$parent);
+    onAddCart(e: any) {
+      orderController.onAddCart(this.$parent);
     }
   }, // methods
 

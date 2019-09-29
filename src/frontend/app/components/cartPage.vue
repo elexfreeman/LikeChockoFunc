@@ -7,20 +7,37 @@
             <div class="cart-caption-1">Оформление заказа</div>
             <div v-bind:class="{ 'has-error': errors['empty_user_name'] }" class="form-group">
               <label class="form-label">Ваше имя:</label>
-              <input v-model="user.name" class="form-input" type="text" />
+              <input
+                v-on:change="()=>onChangeUser(user)"
+                v-model="user.name"
+                class="form-input"
+                type="text"
+              />
             </div>
             <div v-bind:class="{ 'has-error': errors['empty_user_phone'] }" class="form-group">
               <label class="form-label">Ваш телефон:</label>
-              <input v-model="user.phone" class="form-input" type="text" />
+              <input
+                v-on:change="()=>onChangeUser(user)"
+                v-model="user.phone"
+                class="form-input"
+                type="text"
+              />
             </div>
             <div class="form-group">
               <label class="form-label">Город:</label>
-              <input v-model="order.city" class="form-input" type="text" placeholder="Город" />
+              <input
+                v-on:change="()=>onChangeOrder(order)"
+                v-model="order.city"
+                class="form-input"
+                type="text"
+                placeholder="Город"
+              />
             </div>
             <div class="form-group">
               <label class="form-label">Адрес доставки:</label>
               <input
-                v-model="order.deliveryAddress"
+                v-on:change="()=>onChangeOrder(order)"
+                v-model="order.delivery_address"
                 class="form-input"
                 type="text"
                 placeholder="Адрес доставки"
@@ -30,7 +47,8 @@
               <label class="form-label">День доставки:</label>
               <label class="form-radio">
                 <input
-                  v-model="order.deliveryDate"
+                  v-on:click="()=>onChangeOrder(order)"
+                  v-model="order.delivery_date"
                   type="radio"
                   value="day 1"
                   name="gender"
@@ -39,14 +57,21 @@
                 <i class="form-icon"></i> В этот день
               </label>
               <label class="form-radio">
-                <input v-model="order.deliveryDate" type="radio" value="day 2" name="gender" />
+                <input
+                  v-on:click="()=>onChangeOrder(order)"
+                  v-model="order.delivery_date"
+                  type="radio"
+                  value="day 2"
+                  name="gender"
+                />
                 <i class="form-icon"></i> или в этот
               </label>
             </div>
             <div class="form-group">
               <label class="form-label">Ваши пожелания ко времени доставки:</label>
               <input
-                v-model="order.deliveryTimeComment"
+                v-on:change="()=>onChangeOrder(order)"
+                v-model="order.delivery_time_comment"
                 class="form-input"
                 type="text"
                 placeholder="Ваши пожелания ко времени доставки"
@@ -55,6 +80,7 @@
             <div class="form-group">
               <label class="form-label">Комментарий к заказу:</label>
               <input
+                v-on:change="()=>onChangeOrder(order)"
                 v-model="order.comment"
                 class="form-input"
                 type="text"
@@ -64,7 +90,7 @@
           </div>
           <div class="column col-sm-12 col-6 col-cart">
             <div class="cart-caption-1">Корзина</div>
-            <div v-bind:key="index" v-for="(item, index) in cart.products">
+            <div v-bind:key="index" v-for="(item, index) in order.products">
               <div class="columns cart-list">
                 <div class="column col-5">
                   <img class="cart-img" v-bind:src="item.img" />
@@ -105,8 +131,14 @@
 </template>
 
 <script lang='ts'>
-import CartController from "../CartController";
-const cartController = new CartController();
+import { OrderController } from "../OrderController";
+import { UserController } from "../UserController";
+import * as FFOrder from "../../../Func/Order/FFOrder";
+import { OrderI } from "../../../Func/Order/TOrder";
+import { UserI } from "../../../Func/User/TUser";
+
+const orderController = new OrderController();
+const userController = new UserController();
 
 export default {
   name: "cartPage",
@@ -118,30 +150,31 @@ export default {
   mounted() {}, // mounted
 
   methods: {
-    testCheck(e) {
-      console.log(e);
-    },
     onShowCart() {
-      cartController.onShowCart();
+      orderController.onShowCart();
     },
     onHideCart() {
-      cartController.onHideCart();
+      orderController.onHideCart();
     },
-    countInc(item) {
-      item.count++;
-      this.$store.state.cart.save();
+    countInc(item: any) {
+      orderController.countInc(item, +1);
     },
-    countDec(item) {
+    countDec(item: any) {
       if (item.count > 1) {
-        item.count--;
-        this.$store.state.cart.save();
+        orderController.countInc(item, -1);
       }
     },
-    checkout() {
-      cartController.checkout();
+    onChangeOrder(order: OrderI) {
+      orderController.onSaveCart(order);
     },
-    removeItem(item) {
-      this.$store.state.cart.removeItem(item.id);
+    onChangeUser(user: UserI) {
+      userController.onChangeUser(user);
+    },
+    checkout() {
+      orderController.checkout();
+    },
+    removeItem(item: any) {
+      this.$store.state.order.removeItem(item.id);
     }
   }, // methods
 
@@ -151,9 +184,6 @@ export default {
     },
     showCart() {
       return this.$store.state.showCart;
-    },
-    cart() {
-      return this.$store.state.cart;
     },
     order() {
       return this.$store.state.order;
@@ -168,7 +198,7 @@ export default {
       return this.$store.state.cartFormError;
     },
     totalPrice() {
-      return this.$store.state.cart.getTotalPrice();
+      return 0;
     }
   }, // computed
 

@@ -59,14 +59,16 @@ const faCheckout = async (req: MainRequest, res: express.Response, next: any) =>
         req.cValidator.fProcess();
 
         /* записываем заказ */
-        const data = await FOrder.fMakeOrder(userId)
+        const orderId = await FOrder.fMakeOrder(userId)
             (body['order'])
             (FOrder.fCalcOrderTotalSumm);
 
         /* отдаем ответ */
         res.send(fResponse(true)
             (req.cValidator.fGetErrors())
-            (data)
+            ({
+                order_id: orderId
+            })
             ('faCheckout')
         );
     } catch (error) {

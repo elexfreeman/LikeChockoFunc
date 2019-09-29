@@ -103,23 +103,26 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
         }),
-        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             filename: 'example.html',
             template: './src/frontend/html/example.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
+            inject: 'body',
             template: './src/frontend/html/index.html'
         }),
         new HtmlWebpackPlugin({
             filename: 'cart.html',
+            inject: 'body',
             template: './src/frontend/html/cart.html'
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
-        })
+        }),
+        new VueLoaderPlugin(),
+
     ],
     optimization: { //настройки оптимизации и минификации
         flagIncludedChunks: true,

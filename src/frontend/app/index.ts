@@ -6,22 +6,17 @@ import cartComponent from "./components/cartComponent.vue";
 import cartPage from "./components/cartPage.vue";
 
 import store from './AppVuex';
-import { Cart } from '../objects/Cart';
-import { testRun, init } from './CartTable';
+
+const run = () => {
+
+    const buttons = document.querySelectorAll(".cart-button");
+
+    /* Установка кнопок в корзину */
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].setAttribute('id', 'b_' + i);
+    }
 
 
-var buttons = document.querySelectorAll(".cart-button");
-let cart = Cart.Init();
-
-store.commit('setCart', cart);
-
-
-/* Установка кнопок в корзину */
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].setAttribute('id', 'b_' + i);
-}
-
-setTimeout(() => {
 
     for (let i = 0; i < buttons.length; i++) {
         new Vue({
@@ -36,30 +31,37 @@ setTimeout(() => {
             render: h => h(toCart)
         });
     }
-});
 
 
-new Vue({
-    el: '#msg_modal',
-    data: {},
-    store: store,
-    render: h => h(msgModal)
-});
-
-new Vue({
-    el: '#cart',
-    data: {},
-    store: store,
-    render: h => h(cartComponent)
-});
-
-let cart_page = document.getElementById('cart_page');
-if (cart_page) {
 
     new Vue({
-        el: '#cart_page',
+        el: '#msg_modal',
         data: {},
         store: store,
-        render: h => h(cartPage)
+        render: h => h(msgModal)
     });
+
+    new Vue({
+        el: '#cart',
+        data: {},
+        store: store,
+        render: h => h(cartComponent)
+    });
+
+
+
+
+    let cart_page = document.getElementById('cart_page');
+    if (cart_page) {
+
+        new Vue({
+            el: '#cart_page',
+            data: {},
+            store: store,
+            render: h => h(cartPage)
+        });
+    }
+
 }
+
+document.addEventListener("DOMContentLoaded", run);

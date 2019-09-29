@@ -25,7 +25,7 @@ export default {
   mounted() {}, // mounted
 
   methods: {
-    testCheck(e) {
+    testCheck(e: any) {
       console.log(e);
     }
   }, // methods

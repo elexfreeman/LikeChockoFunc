@@ -7,6 +7,13 @@ export interface CheckoutI {
         phone: string,
     },
     order: OrderI
-
     
+}
+
+export interface CheckoutRespI {
+    ok: boolean;
+    errors: any[];
+    data: number;
+    msg: string;
+
 }

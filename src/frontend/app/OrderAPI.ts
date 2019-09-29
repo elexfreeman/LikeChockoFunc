@@ -2,6 +2,7 @@ import { OrderI } from "../../Func/Order/TOrder";
 import axios from "axios";
 import { apiUrl } from "../../Func/Config/Config";
 import { UserI } from "../../Func/User/TUser";
+import { CheckoutI, CheckoutRespI } from "../../Func/Sys/ReqI/OrderR";
 
 
 const vAxios = axios.create({
@@ -10,14 +11,17 @@ const vAxios = axios.create({
     headers: {}
 });
 
-
+/**
+ * Офрмить заказ
+ * @param user 
+ */
 export const fCheckout =
     (user: UserI) =>
-        async (order: OrderI) => {
-            const resp =  await (vAxios.post(
+        async (order: OrderI): Promise<CheckoutRespI> => {
+            const resp = await (vAxios.post(
                 `/order/checkout`, {
                 user: user,
                 order: order
             }));
-            return resp['data'];
+            return <CheckoutRespI>resp['data'];
         }
