@@ -637,6 +637,20 @@ export class TValidator {
 }
 
 /**
+ * Проверка на существования поля 
+ * @param errors 
+ */
+export const fCheckField =
+    (errors: ErrorsI) =>
+        (sField: string): boolean => {
+            try {
+                if (errors[sField]) return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+/**
  * Проверяет есть ли ошибки для данного поля
  * @param errors 
  */

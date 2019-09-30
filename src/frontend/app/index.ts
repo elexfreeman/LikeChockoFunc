@@ -9,7 +9,7 @@ import store from './AppVuex';
 
 const run = () => {
 
-    const buttons = document.querySelectorAll(".cart-button");
+    const buttons = document.querySelectorAll(".card-button");
 
     /* Установка кнопок в корзину */
     for (let i = 0; i < buttons.length; i++) {

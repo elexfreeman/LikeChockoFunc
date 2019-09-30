@@ -3,6 +3,8 @@ import Vuex, { StoreOptions } from 'vuex';
 import { OrderI } from '../../Func/Order/TOrder';
 import * as FFOrder from '../../Func/Order/FFOrder';
 import * as FFUser from '../../Func/User/FFUser';
+import * as FCommonOrder from '../../Func/Order/FCommonOrder';
+
 import { UserI } from '../../Func/User/TUser';
 
 declare var window: any;
@@ -18,6 +20,7 @@ export interface RootState {
     onLoad: boolean;
     cartErrors: any[];
     cartFormError: boolean;
+    totalPrice: number;
 }
 
 export const store: StoreOptions<RootState> = {
@@ -30,12 +33,15 @@ export const store: StoreOptions<RootState> = {
         showCart: false,
         onLoad: false,
         cartErrors: <any>[],
-        cartFormError: false
-
+        cartFormError: false,
+        totalPrice: FCommonOrder.fCalcOrderTotalSumm(FFOrder.fGet().products),
     },
     mutations: {
         setOrder(state: RootState, data: OrderI) {
             state.order = data;
+        },
+        setTotalPrice(state: RootState, data: number) {
+            state.totalPrice = data;
         },
         setUser(state: RootState, data: UserI) {
             state.user = data;

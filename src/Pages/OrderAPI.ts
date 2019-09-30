@@ -9,6 +9,7 @@ import * as FUser from "../Func/User/FUser";
 
 import * as VOrder from "../Func/Order/VOrder";
 import * as FOrder from "../Func/Order/FOrder";
+import * as FCommonOrder from "../Func/Order/FCommonOrder";
 import { CheckoutI } from "../Func/Sys/ReqI/OrderR";
 
 const router = express.Router();
@@ -61,7 +62,7 @@ const faCheckout = async (req: MainRequest, res: express.Response, next: any) =>
         /* записываем заказ */
         const orderId = await FOrder.fMakeOrder(userId)
             (body['order'])
-            (FOrder.fCalcOrderTotalSumm);
+            (FCommonOrder.fCalcOrderTotalSumm);
 
         /* отдаем ответ */
         res.send(fResponse(true)

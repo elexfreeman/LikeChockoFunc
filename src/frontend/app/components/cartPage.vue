@@ -1,10 +1,10 @@
 <template>
-  <div class="cart_component">
+  <div class="card_component">
     <div class="modal-body">
       <div class="content">
         <div class="columns">
           <div class="column col-sm-12 col-6 col-order">
-            <div class="cart-caption-1">Оформление заказа</div>
+            <div class="card-caption-1">Оформление заказа</div>
             <div v-bind:class="{ 'has-error': hasError('User.name') }" class="form-group">
               <label class="form-label">Ваше имя:</label>
               <input
@@ -12,6 +12,7 @@
                 v-model="user.name"
                 class="form-input"
                 type="text"
+                placeholder="Ваше имя"
               />
             </div>
             <div v-bind:class="{ 'has-error': hasError('User.phone') }" class="form-group">
@@ -21,6 +22,7 @@
                 v-model="user.phone"
                 class="form-input"
                 type="text"
+                placeholder="Ваш телефон"
               />
             </div>
             <div class="form-group">
@@ -66,39 +68,26 @@
                 />
                 <i class="form-icon"></i> или в этот
               </label>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Ваши пожелания ко времени доставки:</label>
-              <input
-                v-on:change="()=>onChangeOrder(order)"
-                v-model="order.delivery_time_comment"
-                class="form-input"
-                type="text"
-                placeholder="Ваши пожелания ко времени доставки"
-              />
-            </div>
+            </div>           
             <div class="form-group">
               <label class="form-label">Комментарий к заказу:</label>
-              <input
-                v-on:change="()=>onChangeOrder(order)"
+              <textarea  v-on:change="()=>onChangeOrder(order)"
                 v-model="order.comment"
                 class="form-input"
-                type="text"
-                placeholder="Комментарий к заказу"
-              />
+                placeholder="Комментарий к заказу"></textarea>              
             </div>
           </div>
-          <div class="column col-sm-12 col-6 col-cart">
-            <div class="cart-caption-1">Корзина</div>
+          <div class="column col-sm-12 col-6 col-card">
+            <div class="card-caption-1">Корзина</div>
             <div v-bind:key="index" v-for="(item, index) in order.products">
-              <div class="columns cart-list">
+              <div class="columns card-list">
                 <div class="column col-5">
-                  <img class="cart-img" v-bind:src="item.img" />
+                  <img class="card-img" v-bind:src="item.img" />
                 </div>
                 <div class="column col-7">
                   <div class="item-caption">{{item.caption}}</div>
                   <div class="item-buttons">
-                    <div class="cart-counter">
+                    <div class="card-counter">
                       <div class="conter-button" v-on:click="()=>countDec(item)">
                         <i class="icon icon-minus"></i>
                       </div>
@@ -120,9 +109,9 @@
     </div>
     <div class="modal-footer">
       <div v-if="cartFormError" class="error-msg-footer">Заполненны не все поля</div>
-      <div class="cart-footer">
+      <div class="card-footer">
         <div class="total-price">Итого: {{totalPrice}} руб.</div>
-        <div class="cart-button text-right">
+        <div class="card-button text-right">
           <button v-on:click="checkout" class="btn btn-primary btn-lg">Заказать</button>
         </div>
       </div>
@@ -136,7 +125,7 @@ import { UserController } from "../UserController";
 import * as FFOrder from "../../../Func/Order/FFOrder";
 import { OrderI } from "../../../Func/Order/TOrder";
 import { UserI } from "../../../Func/User/TUser";
-import { fHasError } from "../../../Func/TValidator";
+import { fHasError, fCheckField } from "../../../Func/TValidator";
 
 const orderController = new OrderController();
 const userController = new UserController();
@@ -175,14 +164,13 @@ export default {
       orderController.checkout();
     },
     removeItem(item: any) {
-      this.$store.state.order.removeItem(item.id);
+      orderController.fRemoveProduct(item);
     },
+ 
     hasError(sField: string) {
-      try {
+      if(fCheckField(this.$store.state.cartErrors)(sField)) 
         return fHasError(this.$store.state.cartErrors)(sField);
-      } catch (e) {
-        return false;
-      }
+      return false;
     }
   }, // methods
 
@@ -206,7 +194,7 @@ export default {
       return this.$store.state.cartFormError;
     },
     totalPrice() {
-      return 0;
+      return this.$store.state.totalPrice;
     }
   }, // computed
 

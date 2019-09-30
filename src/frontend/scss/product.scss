@@ -12,12 +12,12 @@
   margin-left: 10px;
   margin-right: 10px;
 
-  .cart-subtitle {
+  .card-subtitle {
     height: 4rem;
-    overflow: hidden;   
+    overflow: hidden;
   }
 
-  .cart-image {
+  .card-image {
     height: 400px;
     cursor: pointer;
   }
@@ -45,19 +45,17 @@
   }
 }
 
-
-
 @media (max-width: 580px) {
   .product {
     width: 100%;
 
-    .cart-image{
+    .card-image {
       height: auto;
     }
     .p-img {
       width: 100%;
     }
-    .img-2{
+    .img-2 {
       display: none;
     }
   }

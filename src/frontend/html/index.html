@@ -11,10 +11,32 @@
 
 <body>
     <div id="msg_modal"></div>
-    <div id="cart"></div>
+
+    <div class="card_component">
+        <div class="card_menu">
+            <div class="columns">
+                <div class="column col-8 col-sm-10 ">
+                    <a class="phone-col" href="tel:123-456-7890">
+                        <img src="http://likechoco.ru//img/phone-ico.png" class="phone-ico">&nbsp;
+                        <span>+7 996 342 8027</span>
+                    </a>
+                </div>
+                <div class="column col-4 col-sm-2 text-right order-col">
+                    <!--  <img
+                        v-if="order.products.length > 0"
+                        v-on:click="onShowCart"
+                        class="order-ico"
+                        src="/img/order-ico.png"
+                    />-->
+                    <div id="cart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container top-container">
         <div class="top-logo">
-            <img src="/img/logo.jpg" />
+            <img src="http://likechoco.ru/img/logo.jpg" />
         </div>
         <h1>Интернет магазин шоколада ручной работы</h1>
         <h2>Мы любим создавать уникальный ремесленный шоколад вам на радость.</h2>
@@ -26,9 +48,9 @@
             <div class="card product">
                 <a href="/nastroenie-chernoe-99">
                     <div class="card-image">
-                        <img class="p-img img-1" src="/img/gork-99-p1.jpg"
+                        <img class="p-img img-1" src="http://likechoco.ru/img/gork-99-p1.jpg"
                             alt="Настроение Рэт 0-е - Шоколад горький 99%">
-                        <img class="p-img img-2" src="/img/gork-99-p1_b.jpg"
+                        <img class="p-img img-2" src="http://likechoco.ru/img/gork-99-p1_b.jpg"
                             alt="Настроение Рэт 0-е - Шоколад горький 99%">
                     </div>
                 </a>
@@ -57,9 +79,9 @@
 
                 </div>
                 <div class="card-footer text-right">
-                    <div product_img="/img/gork-99-p1.jpg" product_id='1'
+                    <div product_img="http://likechoco.ru/img/gork-99-p1.jpg" product_id='1'
                         product_caption='Настроение Рэт 0-е - Шоколад горький 99%' product_price='200.00'
-                        class='cart-button'></div>
+                        class='card-button'></div>
                 </div>
 
             </div>
@@ -67,14 +89,14 @@
             <div class="card product">
                 <a href="/nastroenie-chernoe-99">
                     <div class="card-image">
-                        <img class="p-img img-1" src="/img/gork-99-p1.jpg"
+                        <img class="p-img img-1" src="http://likechoco.ru/img/gork-99-p1.jpg"
                             alt="Настроение Рэт 0-е - Шоколад горький 99%">
-                        <img class="p-img img-2" src="/img/gork-99-p1_b.jpg"
+                        <img class="p-img img-2" src="http://likechoco.ru/img/gork-99-p1_b.jpg"
                             alt="Настроение Рэт 0-е - Шоколад горький 99%">
                     </div>
                 </a>
                 <div class="card-header">
-                    <div class="card-title h5">
+                    <div class="cart-title h5">
                         <a href="/nastroenie-chernoe-99">
                             Настроение Рэт 0-е - Шоколад горький 99%
                         </a>
@@ -98,9 +120,8 @@
 
                 </div>
                 <div class="card-footer text-right">
-                    <div product_img="/img/gork-99-p1.jpg" product_id='2'
-                        product_caption='99%' product_price='100.00'
-                        class='cart-button'></div>
+                    <div product_img="http://likechoco.ru/img/gork-99-p1.jpg" product_id='2' product_caption='99%'
+                        product_price='100.00' class='card-button'></div>
                 </div>
 
             </div>

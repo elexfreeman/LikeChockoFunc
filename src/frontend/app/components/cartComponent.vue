@@ -1,25 +1,7 @@
 <template>
-  <div class="order_component">
-    <div class="order_menu">
-      <div class="columns">
-        <div class="column col-8 col-sm-10 phone-col">
-          <img class="phone-ico" src="/img/phone-ico.png" />
-          <span>{{phone}}</span>
-        </div>
-        <div class="column col-4 col-sm-2 text-right order-col">
-          <!--  <img
-            v-if="order.products.length > 0"
-            v-on:click="onShowCart"
-            class="order-ico"
-            src="/img/order-ico.png"
-          />-->
-          <a href="/cart">
-            <img v-if="order.products.length > 0" class="order-ico" src="/img/order-ico.png" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <a href="/cart">
+    <img v-if="order.products.length > 0" class="card-ico" src="/img/cart-ico.png" />
+  </a>
 </template>
 
 <script lang='ts'>
@@ -93,4 +75,5 @@ export default {
 
 
 <style lang="scss">
+@import "../../scss/style.scss";
 </style>

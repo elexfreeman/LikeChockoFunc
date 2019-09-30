@@ -7,7 +7,7 @@ const {
     VueLoaderPlugin
 } = require('vue-loader');
 
-const entry = require('./entry.js'); //файл с точками входа
+const entry = require('./entryDeploy.js'); //файл с точками входа
 
 module.exports = {
     mode: "development", //режим сборки

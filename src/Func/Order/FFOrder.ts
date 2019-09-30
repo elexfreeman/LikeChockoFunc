@@ -5,6 +5,7 @@
 
 import { OrderI, OrderProductI } from "./TOrder";
 import { TValidator } from '../TValidator';
+import * as FCommonOrder from './FCommonOrder';
 
 import * as _ from "lodash";
 
@@ -213,7 +214,7 @@ export const fRemoveProduct =
     (order: OrderI) =>
         (productId: number): OrderI => {
             order.products = _.remove(order.products, product => {
-                return (product.id != productId)
+                return (product.product_id != productId)
             });
             return order;
         } // товары
